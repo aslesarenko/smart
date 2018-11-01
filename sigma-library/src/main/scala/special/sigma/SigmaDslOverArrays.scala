@@ -34,7 +34,7 @@ package special.sigma {
     trait DefaultContract extends SigmaContract {
       def builder: Rep[SigmaDslBuilder] = RTestSigmaDslBuilder()
     };
-    abstract class TestBox(val id: Rep[Col[Byte]], val value: Rep[Long], val bytes: Rep[Col[Byte]], val bytesWithoutRef: Rep[Col[Byte]], val propositionBytes: Rep[Col[Byte]], val registers: Rep[Col[AnyValue]]) extends Box {
+    abstract class TestBox(val id: Rep[Col[Byte]], val value: Rep[Long], val bytes: Rep[Col[Byte]], val bytesWithoutRef: Rep[Col[Byte]], val propositionBytes: Rep[Col[Byte]], val creationInfo: Rep[(Long, Col[Byte])], val registers: Rep[Col[AnyValue]]) extends Box {
       def builder: Rep[TestSigmaDslBuilder] = RTestSigmaDslBuilder();
       @NeverInline def getReg[T](id: Rep[Int])(implicit cT: Elem[T]): Rep[WOption[T]] = delayInvoke;
       @NeverInline def cost: Rep[Int] = delayInvoke;

@@ -52,6 +52,7 @@ trait ContractsTestkit {
   def newAliceBox(id: Byte, value: Long, registers: Map[Int, Any] = Map()): Box = new TestBox(
     Cols.fromArray(Array[Byte](0, id)), value,
     Cols.fromArray(AliceId), noBytes, noBytes,
+    (0, noBytes),
     regs(registers.map { case (k, v) => (k.toByte, v) })
   )
 

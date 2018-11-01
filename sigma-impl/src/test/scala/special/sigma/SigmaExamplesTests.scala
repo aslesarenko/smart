@@ -14,7 +14,7 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
     val minToRaise = 1000
     val contract = new CrowdFundingContract(timeout, minToRaise, backer, project)
     val bytes = Cols.fromArray(Array[Byte]())
-    val self = new TestBox(selfId, 10, noBytes, noBytes, noBytes, noRegisters)
+    val self = new TestBox(selfId, 10, noBytes, noBytes, noBytes, (0, noBytes), noRegisters)
 
     { // when backer can open
       val ctxForBacker = new TestContext(noInputs, noOutputs, height = 200, self, emptyAvlTree, Array())
@@ -24,7 +24,7 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
     }
 
     { // then project can open
-      val out = new TestBox(outId, minToRaise, noBytes, noBytes, project.propBytes, noRegisters)
+      val out = new TestBox(outId, minToRaise, noBytes, noBytes, project.propBytes, (0, noBytes), noRegisters)
       val ctxForProject = new TestContext(Array(), Array(out), height = 50, self, emptyAvlTree, Array())
       val ok = contract.canOpen(ctxForProject)
       assert(ok)
@@ -41,7 +41,7 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
     val outHeight = 100L
     val outValue = 10L
     val curHeight = outHeight + demurragePeriod
-    val out = new TestBox(outId, outValue, noBytes, noBytes, prop, regs(Map(R4 -> curHeight)))
+    val out = new TestBox(outId, outValue, noBytes, noBytes, prop, (0, noBytes), regs(Map(R4 -> curHeight)))
 
     { //case 1: demurrage time hasn't come yet
       val ctxForProject = new TestContext(
@@ -52,6 +52,7 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
           selfId, outValue,
           noBytes, noBytes,
           prop,
+          (0, noBytes),
           regs(Map(R4 -> outHeight))),
         emptyAvlTree,
         vars = Array()
@@ -74,6 +75,7 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
           selfId, outValue,
           noBytes, noBytes,
           prop,
+          (0, noBytes),
           regs(Map(R4 -> outHeight))),
         emptyAvlTree,
         vars = Array()
@@ -86,7 +88,8 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
     { //case 3: demurrage time has come (miner can spend "demurrageCost" tokens)
       val minerOut = new TestBox(outId, outValue - demurrageCost,
         noBytes, noBytes,
-        prop, regs(Map(R4 -> curHeight)))
+        prop, (0, noBytes),
+        regs(Map(R4 -> curHeight)))
       val ctxForMiner = new TestContext(
         inputs = Array(),
         outputs = Array(minerOut),
@@ -95,6 +98,7 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
           selfId, outValue,
           noBytes, noBytes,
           prop,
+          (0, noBytes),
           regs(Map(R4 -> outHeight))),
         emptyAvlTree,
         vars = Array()

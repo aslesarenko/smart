@@ -259,8 +259,8 @@ object DefaultContract extends EntityObject("DefaultContract") {
 
 object TestBox extends EntityObject("TestBox") {
   case class TestBoxCtor
-      (override val id: Rep[Col[Byte]], override val value: Rep[Long], override val bytes: Rep[Col[Byte]], override val bytesWithoutRef: Rep[Col[Byte]], override val propositionBytes: Rep[Col[Byte]], override val registers: Rep[Col[AnyValue]])
-    extends TestBox(id, value, bytes, bytesWithoutRef, propositionBytes, registers) with Def[TestBox] {
+      (override val id: Rep[Col[Byte]], override val value: Rep[Long], override val bytes: Rep[Col[Byte]], override val bytesWithoutRef: Rep[Col[Byte]], override val propositionBytes: Rep[Col[Byte]], override val creationInfo: Rep[(Long, Col[Byte])], override val registers: Rep[Col[AnyValue]])
+    extends TestBox(id, value, bytes, bytesWithoutRef, propositionBytes, creationInfo, registers) with Def[TestBox] {
     lazy val selfType = element[TestBox]
     // manual fix
     private val thisClass = classOf[Box]
@@ -301,27 +301,27 @@ object TestBox extends EntityObject("TestBox") {
     with ConcreteElem[TestBoxData, TestBox] {
     override lazy val parent: Option[Elem[_]] = Some(boxElement)
     override def buildTypeArgs = super.buildTypeArgs ++ TypeArgs()
-    override def convertBox(x: Rep[Box]) = RTestBox(x.id, x.value, x.bytes, x.bytesWithoutRef, x.propositionBytes, x.registers)
-    override def getDefaultRep = RTestBox(element[Col[Byte]].defaultRepValue, 0l, element[Col[Byte]].defaultRepValue, element[Col[Byte]].defaultRepValue, element[Col[Byte]].defaultRepValue, element[Col[AnyValue]].defaultRepValue)
+    override def convertBox(x: Rep[Box]) = RTestBox(x.id, x.value, x.bytes, x.bytesWithoutRef, x.propositionBytes, x.creationInfo, x.registers)
+    override def getDefaultRep = RTestBox(element[Col[Byte]].defaultRepValue, 0l, element[Col[Byte]].defaultRepValue, element[Col[Byte]].defaultRepValue, element[Col[Byte]].defaultRepValue, element[(Long, Col[Byte])].defaultRepValue, element[Col[AnyValue]].defaultRepValue)
     override lazy val tag = {
       weakTypeTag[TestBox]
     }
   }
 
   // state representation type
-  type TestBoxData = (Col[Byte], (Long, (Col[Byte], (Col[Byte], (Col[Byte], Col[AnyValue])))))
+  type TestBoxData = (Col[Byte], (Long, (Col[Byte], (Col[Byte], (Col[Byte], ((Long, Col[Byte]), Col[AnyValue]))))))
 
   // 3) Iso for concrete class
   class TestBoxIso
     extends EntityIso[TestBoxData, TestBox] with Def[TestBoxIso] {
-    private lazy val _safeFrom = fun { p: Rep[TestBox] => (p.id, p.value, p.bytes, p.bytesWithoutRef, p.propositionBytes, p.registers) }
+    private lazy val _safeFrom = fun { p: Rep[TestBox] => (p.id, p.value, p.bytes, p.bytesWithoutRef, p.propositionBytes, p.creationInfo, p.registers) }
     override def from(p: Rep[TestBox]) =
-      tryConvert[TestBox, (Col[Byte], (Long, (Col[Byte], (Col[Byte], (Col[Byte], Col[AnyValue])))))](eTo, eFrom, p, _safeFrom)
-    override def to(p: Rep[(Col[Byte], (Long, (Col[Byte], (Col[Byte], (Col[Byte], Col[AnyValue])))))]) = {
-      val Pair(id, Pair(value, Pair(bytes, Pair(bytesWithoutRef, Pair(propositionBytes, registers))))) = p
-      RTestBox(id, value, bytes, bytesWithoutRef, propositionBytes, registers)
+      tryConvert[TestBox, (Col[Byte], (Long, (Col[Byte], (Col[Byte], (Col[Byte], ((Long, Col[Byte]) ,Col[AnyValue]))))))](eTo, eFrom, p, _safeFrom)
+    override def to(p: Rep[(Col[Byte], (Long, (Col[Byte], (Col[Byte], (Col[Byte], ((Long, Col[Byte]) , Col[AnyValue]))))))]) = {
+      val Pair(id, Pair(value, Pair(bytes, Pair(bytesWithoutRef, Pair(propositionBytes, Pair(creationInfo, registers)))))) = p
+      RTestBox(id, value, bytes, bytesWithoutRef, propositionBytes, creationInfo, registers)
     }
-    lazy val eFrom = pairElement(element[Col[Byte]], pairElement(element[Long], pairElement(element[Col[Byte]], pairElement(element[Col[Byte]], pairElement(element[Col[Byte]], element[Col[AnyValue]])))))
+    lazy val eFrom = pairElement(element[Col[Byte]], pairElement(element[Long], pairElement(element[Col[Byte]], pairElement(element[Col[Byte]], pairElement(element[Col[Byte]], pairElement(element[(Long, Col[Byte])], element[Col[AnyValue]]))))))
     lazy val eTo = new TestBoxElem(self)
     lazy val selfType = new TestBoxIsoElem
     def productArity = 0
@@ -344,8 +344,8 @@ object TestBox extends EntityObject("TestBox") {
     }
 
     @scalan.OverloadId("fromFields")
-    def apply(id: Rep[Col[Byte]], value: Rep[Long], bytes: Rep[Col[Byte]], bytesWithoutRef: Rep[Col[Byte]], propositionBytes: Rep[Col[Byte]], registers: Rep[Col[AnyValue]]): Rep[TestBox] =
-      mkTestBox(id, value, bytes, bytesWithoutRef, propositionBytes, registers)
+    def apply(id: Rep[Col[Byte]], value: Rep[Long], bytes: Rep[Col[Byte]], bytesWithoutRef: Rep[Col[Byte]], propositionBytes: Rep[Col[Byte]], creationInfo: Rep[(Long, Col[Byte])], registers: Rep[Col[AnyValue]]): Rep[TestBox] =
+      mkTestBox(id, value, bytes, bytesWithoutRef, propositionBytes, creationInfo, registers)
 
     def unapply(p: Rep[Box]) = unmkTestBox(p)
   }
@@ -377,8 +377,8 @@ object TestBox extends EntityObject("TestBox") {
     reifyObject(new TestBoxIso())
 
   def mkTestBox
-    (id: Rep[Col[Byte]], value: Rep[Long], bytes: Rep[Col[Byte]], bytesWithoutRef: Rep[Col[Byte]], propositionBytes: Rep[Col[Byte]], registers: Rep[Col[AnyValue]]): Rep[TestBox] = {
-    new TestBoxCtor(id, value, bytes, bytesWithoutRef, propositionBytes, registers)
+    (id: Rep[Col[Byte]], value: Rep[Long], bytes: Rep[Col[Byte]], bytesWithoutRef: Rep[Col[Byte]], propositionBytes: Rep[Col[Byte]], creationInfo: Rep[(Long, Col[Byte])], registers: Rep[Col[AnyValue]]): Rep[TestBox] = {
+    new TestBoxCtor(id, value, bytes, bytesWithoutRef, propositionBytes, creationInfo, registers)
   }
   def unmkTestBox(p: Rep[Box]) = p.elem.asInstanceOf[Elem[_]] match {
     case _: TestBoxElem @unchecked =>

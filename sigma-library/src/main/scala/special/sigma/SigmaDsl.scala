@@ -58,6 +58,7 @@ package special.sigma {
       def bytes: Rep[Col[Byte]];
       def bytesWithoutRef: Rep[Col[Byte]];
       def propositionBytes: Rep[Col[Byte]];
+      def creationInfo: Rep[(Long, Col[Byte])];
       def cost: Rep[Int];
       def dataSize: Rep[Long];
       def registers: Rep[Col[AnyValue]];

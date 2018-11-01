@@ -22,6 +22,7 @@ class TestBox(
   val bytes: Col[Byte],
   val bytesWithoutRef: Col[Byte],
   val propositionBytes: Col[Byte],
+  override val creationInfo: (Long, Col[Byte]),
   val registers: Col[AnyValue]) extends Box
 {
   def builder = new TestSigmaDslBuilder

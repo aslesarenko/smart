@@ -59,6 +59,7 @@ trait Box extends DslObject {
   def bytes: Col[Byte]
   def bytesWithoutRef: Col[Byte]
   def propositionBytes: Col[Byte]
+  def creationInfo: (Long, Col[Byte])
   def cost: Int
   def dataSize: Long
   def registers: Col[AnyValue]

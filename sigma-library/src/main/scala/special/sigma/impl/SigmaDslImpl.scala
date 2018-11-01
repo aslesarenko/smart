@@ -1003,6 +1003,13 @@ object Box extends EntityObject("Box") {
         true, element[Col[Byte]]))
     }
 
+    def creationInfo: Rep[(Long, Col[Byte])] = {
+      asRep[(Long, Col[Byte])](mkMethodCall(self,
+        thisClass.getMethod("creationInfo"),
+        List(),
+        true, element[(Long, Col[Byte])]))
+    }
+
     def cost: Rep[Int] = {
       asRep[Int](mkMethodCall(self,
         thisClass.getMethod("cost"),
@@ -1107,6 +1114,13 @@ object Box extends EntityObject("Box") {
         thisClass.getMethod("propositionBytes"),
         List(),
         true, element[Col[Byte]]))
+    }
+
+    def creationInfo: Rep[(Long, Col[Byte])] = {
+      asRep[(Long, Col[Byte])](mkMethodCall(source,
+        thisClass.getMethod("creationInfo"),
+        List(),
+        true, element[(Long, Col[Byte])]))
     }
 
     def cost: Rep[Int] = {
