@@ -30,6 +30,12 @@ trait CostedSigmaObject[Val] extends ConcreteCosted[Val] {
   def costOption[T](opt: Option[T], opCost: Int)(implicit cT: RType[T]): CostedOption[T] = {
     opt.fold[CostedOption[T]](new CostedNone(opCost))(x => new CostedSome(dsl.Costing.costedValue(x, SpecialPredef.some(opCost))))
   }
+
+  def costPrimAndColPair[A, B](l: A, r: Col[B]): Costed[(A, Col[B])] =
+    new CostedPair(
+      new CostedPrim(l, Operations.SelectField, 8L),
+      costColWithConstSizedItem(r, 1))
+
 }
 
 class CostedContext(val ctx: Context) extends ConcreteCosted[Context] with CostedSigmaObject[Context] {
@@ -65,6 +71,7 @@ class CostedBox(box: Box, val cost: Int) extends ConcreteCosted[Box] with Costed
   def bytes: CostedCol[Byte] = costColWithConstSizedItem(box.bytes, 1)
   def bytesWithoutRef: CostedCol[Byte] = costColWithConstSizedItem(box.bytesWithoutRef, 1)
   def propositionBytes: CostedCol[Byte] = costColWithConstSizedItem(box.propositionBytes, 1)
+  def creationInfo: Costed[(Long, Col[Byte])] = costPrimAndColPair(box.creationInfo._1, box.creationInfo._2)
   def registers: CostedCol[AnyValue] = {
     val len = box.registers.length
     val costs = dsl.Cols.replicate(len, Operations.AccessBox)
