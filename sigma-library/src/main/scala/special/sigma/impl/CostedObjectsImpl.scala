@@ -169,11 +169,11 @@ object CostedContext extends EntityObject("CostedContext") {
         true, true, element[CostedCol[Box]]))
     }
 
-    def HEIGHT: Rep[Costed[Long]] = {
-      asRep[Costed[Long]](mkMethodCall(source,
+    def HEIGHT: Rep[Costed[Int]] = {
+      asRep[Costed[Int]](mkMethodCall(source,
         thisClass.getMethod("HEIGHT"),
         List(),
-        true, true, element[Costed[Long]]))
+        true, true, element[Costed[Int]]))
     }
 
     def SELF: Rep[CostedBox] = {

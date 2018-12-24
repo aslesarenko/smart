@@ -23,7 +23,7 @@ package special.sigma {
     trait CostedContext extends CostedSigmaObject[Context] {
       def OUTPUTS: Rep[CostedCol[Box]];
       def INPUTS: Rep[CostedCol[Box]];
-      def HEIGHT: Rep[Costed[Long]];
+      def HEIGHT: Rep[Costed[Int]];
       def SELF: Rep[CostedBox];
       def LastBlockUtxoRootHash: Rep[CostedAvlTree];
       def MinerPubKey: Rep[CostedCol[Byte]];

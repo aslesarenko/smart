@@ -29,9 +29,9 @@ package special.sigma {
       def dsl: Rep[SigmaDslBuilder] = RTestSigmaDslBuilder();
       def OUTPUTS: Rep[CostedCol[Box]] = CCostedContext.this.dsl.costBoxes(CCostedContext.this.ctx.OUTPUTS);
       def INPUTS: Rep[CostedCol[Box]] = CCostedContext.this.dsl.costBoxes(CCostedContext.this.ctx.INPUTS);
-      def HEIGHT: Rep[Costed[Long]] = {
+      def HEIGHT: Rep[Costed[Int]] = {
         val cost: Rep[Int] = CCostedContext.this.dsl.CostModel.SelectField;
-        RCCostedPrim(CCostedContext.this.ctx.HEIGHT, cost, toRep(8L.asInstanceOf[Long]))
+        RCCostedPrim(CCostedContext.this.ctx.HEIGHT, cost, toRep(4L.asInstanceOf[Long]))
       };
       def SELF: Rep[CostedBox] = RCCostedBox(CCostedContext.this.ctx.SELF, CCostedContext.this.dsl.CostModel.AccessBox);
       def LastBlockUtxoRootHash: Rep[CostedAvlTree] = RCCostedAvlTree(CCostedContext.this.ctx.LastBlockUtxoRootHash, CCostedContext.this.dsl.CostModel.AccessAvlTree);
