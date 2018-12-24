@@ -109,7 +109,7 @@ trait Context {
   def builder: SigmaDslBuilder
   def OUTPUTS: Col[Box]
   def INPUTS: Col[Box]
-  def HEIGHT: Long
+  def HEIGHT: Int
   def SELF: Box
   def LastBlockUtxoRootHash: AvlTree
   def MinerPubKey: Col[Byte]

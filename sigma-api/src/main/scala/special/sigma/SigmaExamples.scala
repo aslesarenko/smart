@@ -106,13 +106,13 @@ trait CoinEmission extends SigmaContract {
 }
 
 trait DemurrageCurrency extends SigmaContract {
-  def demurragePeriod: Long
+  def demurragePeriod: Int
   def demurrageCost: Long
   def regScript: SigmaProp
 
   @clause def canOpen(ctx: Context) = verifyZK {
     val c2 =
-      ctx.HEIGHT >= ctx.SELF.R4[Long].get + demurragePeriod &&
+      ctx.HEIGHT >= ctx.SELF.R4[Int].get + demurragePeriod &&
       ctx.OUTPUTS.exists(out => {
         out.value >= ctx.SELF.value - demurrageCost && out.propositionBytes == ctx.SELF.propositionBytes
       })

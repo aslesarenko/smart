@@ -12,7 +12,7 @@ trait CostedSigmaObject[Val] extends Costed[Val] {
 trait CostedContext extends CostedSigmaObject[Context] {
   def OUTPUTS: CostedCol[Box]
   def INPUTS: CostedCol[Box]
-  def HEIGHT: Costed[Long]
+  def HEIGHT: Costed[Int]
   def SELF: CostedBox
   def LastBlockUtxoRootHash: CostedAvlTree
   def MinerPubKey: CostedCol[Byte]

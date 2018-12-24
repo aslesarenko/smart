@@ -8,7 +8,7 @@ class CrowdFundingContract(
 }
 
 class DemurrageCurrencyContract(
-    val demurragePeriod: Long,
+    val demurragePeriod: Int,
     val demurrageCost: Long,
     val regScript: SigmaProp
 ) extends DemurrageCurrency with DefaultContract {

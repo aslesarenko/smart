@@ -74,7 +74,7 @@ class TestValue[T](val value: T) extends AnyValue {
 class TestContext(
     val inputs: Array[Box],
     val outputs: Array[Box],
-    val height: Long,
+    val height: Int,
     val selfBox: Box,
     val lastBlockUtxoRootHash: AvlTree,
     val minerPubKey: Array[Byte],

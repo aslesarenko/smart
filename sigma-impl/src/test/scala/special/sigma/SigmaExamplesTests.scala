@@ -38,7 +38,7 @@ class SigmaExamplesTests extends FunSuite with ContractsTestkit {
     val contract = new DemurrageCurrencyContract(demurragePeriod, demurrageCost, userProof)
 
     val prop = Cols.fromArray(Array[Byte](1, 2))
-    val outHeight = 100L
+    val outHeight = 100
     val outValue = 10L
     val curHeight = outHeight + demurragePeriod
     val out = new TestBox(outId, outValue, noBytes, noBytes, prop, regs(Map(R4 -> curHeight)))

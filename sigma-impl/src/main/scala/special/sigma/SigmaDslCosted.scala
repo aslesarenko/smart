@@ -11,9 +11,9 @@ class CCostedContext(val ctx: Context) extends CostedContext {
   def dsl: SigmaDslBuilder = new TestSigmaDslBuilder
   def OUTPUTS: CostedCol[Box] = dsl.costBoxes(ctx.OUTPUTS)
   def INPUTS: CostedCol[Box] = dsl.costBoxes(ctx.INPUTS)
-  def HEIGHT: Costed[Long] = {
+  def HEIGHT: Costed[Int] = {
     val cost = dsl.CostModel.SelectField
-    new CCostedPrim(ctx.HEIGHT, cost, 8L)
+    new CCostedPrim(ctx.HEIGHT, cost, 4L)
   }
   def SELF: CostedBox = new CCostedBox(ctx.SELF, dsl.CostModel.AccessBox)
   def LastBlockUtxoRootHash: CostedAvlTree = new CCostedAvlTree(ctx.LastBlockUtxoRootHash, dsl.CostModel.AccessAvlTree)

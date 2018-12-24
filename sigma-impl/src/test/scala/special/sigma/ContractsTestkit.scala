@@ -56,7 +56,7 @@ trait ContractsTestkit {
     regs(registers.map { case (k, v) => (k.toByte, v) })
   )
 
-  def newContext(height: Long, self: Box, vars: AnyValue*): TestContext = {
+  def newContext(height: Int, self: Box, vars: AnyValue*): TestContext = {
     new TestContext(noInputs, noOutputs, height, self, emptyAvlTree, dummyPubkey, vars.toArray)
   }
 
