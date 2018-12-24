@@ -799,11 +799,11 @@ object TestContext extends EntityObject("TestContext") {
     // manual fix
     private val thisClass = classOf[Context]
 
-    override def HEIGHT: Rep[Long] = {
-      asRep[Long](mkMethodCall(self,
+    override def HEIGHT: Rep[Int] = {
+      asRep[Int](mkMethodCall(self,
         thisClass.getMethod("HEIGHT"),
         List(),
-        true, false, element[Long]))
+        true, false, element[Int]))
     }
 
     override def SELF: Rep[Box] = {

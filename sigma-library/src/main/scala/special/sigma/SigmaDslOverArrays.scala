@@ -61,7 +61,7 @@ package special.sigma {
     };
     abstract class TestContext(val inputs: Rep[WArray[Box]], val outputs: Rep[WArray[Box]], val height: Rep[Long], val selfBox: Rep[Box], val lastBlockUtxoRootHash: Rep[AvlTree], val minerPubKey: Rep[WArray[Byte]], val vars: Rep[WArray[AnyValue]]) extends Context {
       def builder: Rep[TestSigmaDslBuilder] = RTestSigmaDslBuilder();
-      @NeverInline def HEIGHT: Rep[Long] = delayInvoke;
+      @NeverInline def HEIGHT: Rep[Int] = delayInvoke;
       @NeverInline def SELF: Rep[Box] = delayInvoke;
       @NeverInline def INPUTS: Rep[Col[Box]] = delayInvoke;
       @NeverInline def OUTPUTS: Rep[Col[Box]] = delayInvoke;

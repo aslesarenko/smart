@@ -1898,11 +1898,11 @@ object Context extends EntityObject("Context") {
         true, false, element[Col[Box]]))
     }
 
-    def HEIGHT: Rep[Long] = {
-      asRep[Long](mkMethodCall(self,
+    def HEIGHT: Rep[Int] = {
+      asRep[Int](mkMethodCall(self,
         thisClass.getMethod("HEIGHT"),
         List(),
-        true, false, element[Long]))
+        true, false, element[Int]))
     }
 
     def SELF: Rep[Box] = {
@@ -1996,12 +1996,12 @@ object Context extends EntityObject("Context") {
         true, true, element[Col[Box]]))
     }
 
-    def HEIGHT: Rep[Long] = {
-      asRep[Long](mkMethodCall(source,
+    def HEIGHT: Rep[Int] = {
+      asRep[Int](mkMethodCall(source,
         thisClass.getMethod("HEIGHT"),
         List(),
-        true, true, element[Long]))
-    }
+        true, true, element[Int]))
+         }
 
     def SELF: Rep[Box] = {
       asRep[Box](mkMethodCall(source,

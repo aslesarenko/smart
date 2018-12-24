@@ -93,7 +93,7 @@ package special.sigma {
       def builder: Rep[SigmaDslBuilder];
       def OUTPUTS: Rep[Col[Box]];
       def INPUTS: Rep[Col[Box]];
-      def HEIGHT: Rep[Long];
+      def HEIGHT: Rep[Int];
       def SELF: Rep[Box];
       def LastBlockUtxoRootHash: Rep[AvlTree];
       def MinerPubKey: Rep[Col[Byte]];
