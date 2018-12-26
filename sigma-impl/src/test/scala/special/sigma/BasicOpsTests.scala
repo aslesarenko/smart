@@ -56,6 +56,10 @@ class BasicOpsTests extends FunSuite with ContractsTestkit with Matchers {
     val ctx = new TestContext(noInputs, noOutputs, height = 200, self, emptyAvlTree, dummyPubkey, Array())
   }
 
+  test("box.creationInfo._1 is Int") {
+    val box = newAliceBox(1, 100, Map(3 -> (20 -> Array.emptyByteArray)))
+    box.creationInfo._1 shouldBe a [Integer]
+  }
 
 
   case class Contract1(base64_pk1: String) extends DefaultContract {

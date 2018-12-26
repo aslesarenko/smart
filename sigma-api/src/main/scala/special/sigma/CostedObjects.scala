@@ -28,7 +28,7 @@ trait CostedBox extends CostedSigmaObject[Box] {
   def propositionBytes: CostedCol[Byte]
   def registers: CostedCol[AnyValue]
   def getReg[@Reified T](id: Int)(implicit cT:RType[T]): CostedOption[T]
-  def creationInfo: Costed[(Long, Col[Byte])]
+  def creationInfo: Costed[(Int, Col[Byte])]
 }
 
 trait CostedAvlTree extends CostedSigmaObject[AvlTree] {

@@ -38,7 +38,7 @@ package special.sigma {
       def propositionBytes: Rep[CostedCol[Byte]];
       def registers: Rep[CostedCol[AnyValue]];
       def getReg[T](id: Rep[Int])(implicit cT: Elem[T]): Rep[CostedOption[T]];
-      def creationInfo: Rep[Costed[scala.Tuple2[Long, Col[Byte]]]]
+      def creationInfo: Rep[Costed[scala.Tuple2[Int, Col[Byte]]]]
     };
     trait CostedAvlTree extends CostedSigmaObject[AvlTree] {
       def startingDigest: Rep[CostedCol[Byte]];

@@ -88,7 +88,7 @@ trait Box extends DslObject {
   def R9[@Reified T](implicit cT:RType[T]): Option[T] = this.getReg[T](9)
 
   def tokens: Col[(Col[Byte], Long)]
-  def creationInfo: (Long, Col[Byte])
+  def creationInfo: (Int, Col[Byte])
   @Internal
   override def toString = s"Box(id=$id; value=$value; cost=$cost; size=$dataSize; regs=$registers)"
 }

@@ -24,7 +24,7 @@ class SigmaDslTests extends WrappersTests with ContractsTestkit {
     type RContext = cake.Context
     type RBox = cake.Box
     type RSigmaProp = cake.SigmaProp
-    val boxA1 = newAliceBox(1, 100, Map(1 -> 20))
+    val boxA1 = newAliceBox(1, 100, Map(1 -> 20, 3 -> (10 -> Array.emptyByteArray)))
     val boxA2 = newAliceBox(2, 200)
     val ctx: SContext = newContext(10, boxA1)
       .withInputs(boxA2)
@@ -42,6 +42,7 @@ class SigmaDslTests extends WrappersTests with ContractsTestkit {
       for { obj <- env; id <- lifted(1.toByte) } yield obj.getVar[Int](id) }, ctx.getVar[Int](1))
 
     check(boxA1, { env: EnvRep[RBox] => for { obj <- env } yield obj.value }, boxA1.value)
+    check(boxA1, { env: EnvRep[RBox] => for { obj <- env } yield obj.creationInfo }, boxA1.creationInfo)
     check(boxA1, { env: EnvRep[RBox] => for { obj <- env; arg <- lifted(1) } yield obj.getReg[Int](arg) }, boxA1.getReg[Int](1))
     check(boxA1, { env: EnvRep[RBox] => for { obj <- env } yield obj.registers }, boxA1.registers)
 

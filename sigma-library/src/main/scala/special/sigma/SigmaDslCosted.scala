@@ -65,7 +65,7 @@ package special.sigma {
         val opt: Rep[WOption[T]] = CCostedBox.this.box.getReg[T](id);
         CCostedBox.this.dsl.costOption[T](opt, CCostedBox.this.dsl.CostModel.GetRegister)
       };
-      @NeverInline def creationInfo: Rep[Costed[scala.Tuple2[Long, Col[Byte]]]] = delayInvoke;
+      @NeverInline def creationInfo: Rep[Costed[scala.Tuple2[Int, Col[Byte]]]] = delayInvoke;
       def value: Rep[Box] = CCostedBox.this.box;
       def dataSize: Rep[Long] = CCostedBox.this.box.dataSize
     };

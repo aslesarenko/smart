@@ -44,7 +44,7 @@ class TestBox(
   @NeverInline
   def dataSize = bytes.length
 
-  def creationInfo: (Long, Col[Byte]) = this.R3[(Long, Col[Byte])].get
+  def creationInfo: (Int, Col[Byte]) = this.R3[(Int, Col[Byte])].get
 
   def tokens: Col[(Col[Byte], Long)] = {
     this.R2[Col[(Col[Byte], Long)]].get

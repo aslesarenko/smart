@@ -456,11 +456,11 @@ object CostedBox extends EntityObject("CostedBox") {
         true, true, element[CostedOption[T]]))
     }
 
-    def creationInfo: Rep[Costed[(Long, Col[Byte])]] = {
-      asRep[Costed[(Long, Col[Byte])]](mkMethodCall(source,
+    def creationInfo: Rep[Costed[(Int, Col[Byte])]] = {
+      asRep[Costed[(Int, Col[Byte])]](mkMethodCall(source,
         thisClass.getMethod("creationInfo"),
         List(),
-        true, true, element[Costed[(Long, Col[Byte])]]))
+        true, true, element[Costed[(Int, Col[Byte])]]))
     }
 
     def dsl: Rep[SigmaDslBuilder] = {

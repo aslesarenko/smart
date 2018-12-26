@@ -53,7 +53,7 @@ class CCostedBox(val box: Box, val cost: Int) extends CostedBox {
   }
 
   @NeverInline
-  def creationInfo: Costed[(Long, Col[Byte])] = SpecialPredef.rewritableMethod
+  def creationInfo: Costed[(Int, Col[Byte])] = SpecialPredef.rewritableMethod
 
   def value: Box = box
   def dataSize: Long = box.dataSize

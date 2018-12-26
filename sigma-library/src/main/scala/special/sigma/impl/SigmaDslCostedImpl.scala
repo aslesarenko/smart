@@ -304,11 +304,11 @@ object CCostedBox extends EntityObject("CCostedBox") {
     lazy val selfType = element[CCostedBox]
     private val thisClass = classOf[CCostedBox]
 
-    override def creationInfo: Rep[Costed[(Long, Col[Byte])]] = {
-      asRep[Costed[(Long, Col[Byte])]](mkMethodCall(self,
+    override def creationInfo: Rep[Costed[(Int, Col[Byte])]] = {
+      asRep[Costed[(Int, Col[Byte])]](mkMethodCall(self,
         thisClass.getMethod("creationInfo"),
         List(),
-        true, false, element[Costed[(Long, Col[Byte])]]))
+        true, false, element[Costed[(Int, Col[Byte])]]))
     }
   }
   // elem for concrete class
